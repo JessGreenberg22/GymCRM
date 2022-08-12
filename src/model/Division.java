@@ -52,10 +52,7 @@ public class Division {
         return countryID;
     }
 
-    /**
-     * defines default setters
-     * @return
-     */
+    /**setters*/
     public void setDivisionID(int divisionID){
         this.divisionID = divisionID;
     }

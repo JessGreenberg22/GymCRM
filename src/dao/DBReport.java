@@ -39,19 +39,16 @@ public static ObservableList getTotalNumberOfAppointments(){
 }
 
     /**method to generate contact schedule report from database*/
-
-
     public static ObservableList<Report> getAllAppointmentsByConsultant(int contactId)  {
 
         ObservableList<Report> consultantSchedule = FXCollections.observableArrayList();
 
         try {
 
-            String sql = "SELECT Appointment_ID, Title, Type, Description, Start, End, Customer_ID, Contact_ID FROM appointments where Contact_ID = ?";
+            String sql = "SELECT Appointment_ID, Title, Type, Description, Start, End, Customer_ID, Contact_ID FROM appointments WHERE Contact_ID = ?";
 
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setInt(1, contactId);
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -77,30 +74,28 @@ public static ObservableList getTotalNumberOfAppointments(){
         return consultantSchedule;
     }
 
-    /**method to query total number of appointments by customer per year*/
-    public static ObservableList getTotalCustomerAppointments(){
-
-        ObservableList<Report> customerTotalList = FXCollections.observableArrayList();
+    /**method to query customer ID and type */
+    public static ObservableList getIDandType(){
+        ObservableList<Report> IDandType = FXCollections.observableArrayList();
 
         try {
 
-            String sql = "Select year(start) as year, Customer_ID, count(*) as TotalCustomerAppointments from appointments GROUP BY year, type ORDER BY Customer_ID asc";
+            String sql = "SELECT Customer_ID,Type FROM appointments ORDER BY Customer_ID asc";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                int year = rs.getInt("year");
+            while (rs.next())
+            {
                 int customerID  = rs.getInt("Customer_ID");
-                String totalCustomerAppointments = rs.getString("TotalCustomerAppointments");
-                Report r = new Report(year, customerID, totalCustomerAppointments);
-                customerTotalList.add(r);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+                String appType = rs.getString("Type");
 
-        return customerTotalList;
+                Report m = new Report(customerID,appType);
+                IDandType.add(m);
+            }
+        } catch (SQLException throwables)
+        { throwables.printStackTrace();}
+
+
+        return IDandType;
     }
 
 }

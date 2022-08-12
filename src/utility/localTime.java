@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class Helper {
+public class localTime {
     private static final LocalTime START_BUSINESS_HOURS_EST = LocalTime.of(8,0);
     private static final LocalTime END_BUSINESS_HOURS_EST = LocalTime.of(22,0);
 
@@ -19,7 +19,6 @@ public class Helper {
         ZonedDateTime estStartZDT = ZonedDateTime.of(LocalDate.now(),START_BUSINESS_HOURS_EST, ZoneId.of("America/New_York"));
         ZonedDateTime estEndZDT = ZonedDateTime.of(LocalDate.now(),END_BUSINESS_HOURS_EST, ZoneId.of("America/New_York"));
         LocalTime localStart = estStartZDT.withZoneSameInstant(ZoneId.systemDefault()).toLocalTime();
-        //System.out.println("localStart = " + localStart);
         LocalTime localEnd = estEndZDT.withZoneSameInstant(ZoneId.systemDefault()).toLocalTime();
 
         if(localStartTimeList.size() == 0 || localEndTimeList.size() == 0){

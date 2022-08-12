@@ -14,7 +14,7 @@ public class Logger {public static String fileName = "login_activity.txt";
             PrintWriter lFile = new PrintWriter(fWriter);
             lFile.println(log);
             lFile.close();
-            lFile.println(log + " has been recorded successfully");
+            lFile.println(log + " recorded successfully");
 
 
         } catch (IOException e) {

@@ -2,6 +2,7 @@ package dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Appointment;
 import model.Country;
 import model.Customer;
 
@@ -9,69 +10,68 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBCustomer { /**
- * method to add customer data to tableview on CustomerScreen
- *
- * @return
- */
-public static ObservableList<Customer> getAllCustomers() {
+public class DBCustomer {
+    public static ObservableList<Customer> getAllCustomers()
 
-    ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
-    try {
+    /**set customer data to tableview on CustomerScreen*/
+    {
+        ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
-        String sql = "SELECT * from customers INNER JOIN first_level_divisions AS d ON d.division_ID = customers.Division_ID";
+        try {
 
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
 
-        ResultSet rs = ps.executeQuery();
+            String sql = "SELECT * from customers, first_level_divisions, countries WHERE customers.Division_ID = first_level_divisions.Division_ID AND first_level_divisions.Country_ID = countries.Country_ID";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
-            int customerID = rs.getInt("Customer_ID");
-            String name = rs.getString("Customer_Name");
-            String address = rs.getString("Address");
-            int divisionID = rs.getInt("Division_ID");
-            Country thisCountry = DBCountry.getCountryByDivisionID(divisionID);
-            String country = "";
-            if (thisCountry != null) {
-                country = thisCountry.getCountryName();
+            while (rs.next()) {
+                int customerID = rs.getInt("Customer_ID");
+                String name = rs.getString("Customer_Name");
+                String address = rs.getString("Address");
+                int divisionID = rs.getInt("Division_ID");
+                Country thisCountry = DBCountry.getCountryByDivisionID(divisionID);
+                String country = "";
+                if (thisCountry != null) {
+                    country = thisCountry.getCountryName();
+                }
+                String division = rs.getString("Division");
+                String postalCode = rs.getString("Postal_Code");
+                String phoneNumber = rs.getString("Phone");
+
+                Customer c = new Customer(customerID, name, address, divisionID, postalCode, phoneNumber);
+                c.setDivision(division);
+                c.setCountry(country);
+                customerList.add(c);
             }
-            String division = rs.getString("Division");
-            String postalCode = rs.getString("Postal_Code");
-            String phoneNumber = rs.getString("Phone");
-            Customer c = new Customer(customerID, name, address,divisionID, postalCode, phoneNumber);
-            c.setDivision(division);
-            c.setCountry(country);
-            customerList.add(c);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-    } catch (SQLException throwables) {
-        throwables.printStackTrace();
+
+        return customerList;
     }
 
-    return customerList;
-}
-
-    /**add customer to database*/
+    /** add customer */
     public static void addCustomer(Customer customer) {
 
         try {
 
             String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code,Phone, Division_ID) VALUES (?,?,?,?,?)";
-            PreparedStatement cust = JDBC.getConnection().prepareStatement(sql);
-            cust.setString(1, customer.getName());
-            cust.setString(2, customer.getAddress());
-            cust.setString(3,customer.getPostalCode());
-            cust.setString(4,customer.getPhoneNumber());
-            cust.setInt(5, customer.getDivisionID());
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, customer.getName());
+            ps.setString(2, customer.getAddress());
+            ps.setString(3,customer.getPostalCode());
+            ps.setString(4,customer.getPhoneNumber());
+            ps.setInt(5, customer.getDivisionID());
 
-            int status = cust.executeUpdate();
+            int status = ps.executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-    /**modify customer in database*/
+    /** modify a selected customer */
     public static void modifyCustomer(Customer customer) {
 
         try {
@@ -91,19 +91,23 @@ public static ObservableList<Customer> getAllCustomers() {
             throwables.printStackTrace();
         }
     }
+    /**delete customer & associated Appointments*/
 
-    /**delete customer and associated appointments in database*/
     public static void deleteCustomer(int customerId) {
 
         try {
+
+
+            String dp = "DELETE FROM appointments where customer_id = ?";
+            PreparedStatement pStatement = JDBC.getConnection().prepareStatement(dp);
+            pStatement.setInt(1, customerId);
+
+            pStatement.executeUpdate();
 
             String sql = "DELETE FROM customers where customer_id = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setInt(1, customerId);
 
-            String sql2 = "DELETE FROM appointment where customer_id = ?";
-            PreparedStatement pStatement = JDBC.getConnection().prepareStatement(sql2);
-            pStatement.setInt(1, customerId);
 
             int status = ps.executeUpdate();
 
@@ -113,4 +117,3 @@ public static ObservableList<Customer> getAllCustomers() {
         }
     }
 }
-

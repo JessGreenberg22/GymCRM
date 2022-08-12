@@ -4,6 +4,7 @@ import dao.DBAppointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,11 +21,8 @@ import java.util.ResourceBundle;
  * @Author Jessica Greenberg Student ID 001462404
  */
 public class AppointmentScreen implements Initializable {
-    public Button returnbtnID;
-    public Button scheduleAppointmentId;
-    public Button updateAppointmetnId;
-    
-    /*AppointmentTable*/
+
+    /**AppointmentTable*/
     public TableView appointmentTable;
     public TableColumn appointmentIdCol;
     public TableColumn appTitleCol;
@@ -36,6 +34,11 @@ public class AppointmentScreen implements Initializable {
     public TableColumn appEndCol;
     public TableColumn appCustIdCol;
     public TableColumn appUserIdCol;
+   /*Navigational Buttons*/
+    public Button returnbtnID;
+    public Button scheduleAppointmentId;
+    public Button updateAppointmetnId;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,21 +68,42 @@ public class AppointmentScreen implements Initializable {
         Stage window = (Stage) scheduleAppointmentId.getScene().getWindow();
         window.setScene(new Scene(root, 640,520));
     }
-
+/**Update a Selected Appointment*/
     public void UpdateApptBtn(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/updateAppointment.fxml")));
-        Stage window = (Stage) updateAppointmetnId.getScene().getWindow();
-        window.setScene(new Scene(root, 640,520));
+        FXMLLoader loader = new FXMLLoader (getClass().getResource("/view/updateAppointment.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene= new Scene(root, 640,520);
+        UpdateAppointment updateAppointment = loader.getController();
+
+        Appointment selectedAppointment = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
+        if (selectedAppointment == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Select an appointment to modify");
+
+            alert.showAndWait();
+
+            return;
+        }
+        else {
+            updateAppointment.setAppointment((Appointment) appointmentTable.getSelectionModel().getSelectedItem());
+        }
+        stage.setTitle("Modify Appointment");
+        stage.setScene(scene);
+        stage.show();
     }
 
-    /**method to delete appointment*/
+
+    /**delete a selected appointment*/
     public void cancelAppt(ActionEvent actionEvent) throws IOException {
 
         Appointment selection = (Appointment) appointmentTable.getSelectionModel().getSelectedItem();
 
         if (selection == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error;please select an appointment");
+            alert.setTitle("Error;select appointment");
             alert.setContentText("Select appointment to delete");
             Optional<ButtonType> result = alert.showAndWait();
         } else {

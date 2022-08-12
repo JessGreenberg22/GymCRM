@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class DBCountry {
     /*
-    method to get a list of all countries
-     */
+   method to get a list of all countries
+    */
     public static ObservableList<Country> getAllCountries(){
 
         ObservableList<Country> clist = FXCollections.observableArrayList();
@@ -27,18 +27,20 @@ public class DBCountry {
             while (rs.next()){
                 int countryID = rs.getInt("Country_ID");
                 String countryName = rs.getString("Country");
+
+
                 Country c = new Country(countryID, countryName);
                 clist.add(c);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException t) {
+            t.printStackTrace();
         }
 
         return clist;
 
     }
 
-    /**method to get divisions using countryID*/
+    /** get divisions using countryID */
     public static ObservableList<String> getFirstLevelDivision(int countryID){
 
         ObservableList<String> clist = FXCollections.observableArrayList();
@@ -64,7 +66,7 @@ public class DBCountry {
 
     }
 
-    /**method to get divisionID*/
+    /*method to get divisionID*/
     public static int getDivisionId(String division){
 
         int divisionId = -1;
@@ -89,11 +91,11 @@ public class DBCountry {
 
     }
 
-    /*get country by passing division ID*/
+    /*** method to get country by passing division ID*/
     public static Country getCountryByDivisionID(int divisionID) {
         Country country = null;
         try {
-            String sql = "SELECT c.country_ID, c.country FROM Country AS c INNER JOIN first_level_divisions AS d ON d.country_ID = c.country_ID AND d.division_ID = ?";
+            String sql = "SELECT c.country_ID, c.country FROM countries AS c INNER JOIN first_level_divisions AS d ON d.country_ID = c.country_ID AND d.division_ID = ?";
 
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setInt(1,divisionID);
@@ -112,4 +114,3 @@ public class DBCountry {
     }
 
 }
-

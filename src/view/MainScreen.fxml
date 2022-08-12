@@ -22,11 +22,10 @@
       </TableView>
       <Button fx:id="custRecordsID" layoutX="254.0" layoutY="291.0" mnemonicParsing="false" onAction="#custRecordsAction" text="Customer Records" />
       <Button fx:id="appointmentBtnId" layoutX="49.0" layoutY="291.0" mnemonicParsing="false" onAction="#appointmentBtnAction" text="Appointment Management" />
-      <Button fx:id="exit" layoutX="406.0" layoutY="291.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+      <Button fx:id="exit" layoutX="688.0" layoutY="291.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
       <Label layoutX="234.0" layoutY="14.0" text="Upcoming Appointments">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
+         <font><Font name="System Bold" size="24.0" /></font>
       </Label>
+      <Button fx:id="ReportsId" layoutX="406.0" layoutY="291.0" mnemonicParsing="false" onAction="#OnReports" text="Reports" />
    </children>
 </AnchorPane>

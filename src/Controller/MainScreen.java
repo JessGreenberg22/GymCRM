@@ -21,8 +21,8 @@ import java.util.ResourceBundle;
  */
 public class MainScreen implements Initializable{
 
-    public Button custRecordsID;
-    public Button appointmentBtnId;
+
+
     /*AppointmentTable*/
     public TableView appointmentTable;
     public TableColumn appointmentIdCol;
@@ -36,12 +36,19 @@ public class MainScreen implements Initializable{
     public TableColumn appCustIdCol;
     public TableColumn appUserIdCol;
 
+    /**Buttons to Navigate Application*/
+    public Button custRecordsID;
+    public Button appointmentBtnId;
+    public Button ReportsId;
+
+    /**Button on MainScreen to Exit the Application*/
+    public Button exit;
 
     /**Navigation to customer Records*/
     public void custRecordsAction(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerRecords.fxml")));
         Stage window = (Stage) custRecordsID.getScene().getWindow();
-        window.setScene(new Scene(root, 800,455));
+        window.setScene(new Scene(root, 850,455));
     }
     /**Navigation to Appointment Screen*/
     public void appointmentBtnAction(ActionEvent actionEvent) throws IOException {
@@ -49,7 +56,9 @@ public class MainScreen implements Initializable{
         Stage window = (Stage) appointmentBtnId.getScene().getWindow();
         window.setScene(new Scene(root, 789,366));
     }
-    /**Exit The Application, when you choose to exit the application a confirmation prompt will appear so that you can verify you want to exit*/
+
+
+    /**Exit The Application*/
     public void exit(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm");
@@ -61,7 +70,6 @@ public class MainScreen implements Initializable{
             System.exit(0);
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -78,5 +86,10 @@ public class MainScreen implements Initializable{
         appUserIdCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
     }
 
-
+    /*Navigation to generated reports Screen*/
+    public void OnReports(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/reportsScreen.fxml")));
+        Stage window = (Stage) ReportsId.getScene().getWindow();
+        window.setScene(new Scene(root, 1000,650));
+    }
 }

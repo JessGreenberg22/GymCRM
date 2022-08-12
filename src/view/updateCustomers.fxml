@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateCustomers">
+    <Label layoutX="192.0" layoutY="30.0" text="Update Customer Informtaion">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font>
+    </Label>
+    <Label layoutX="31.0" layoutY="106.0" text="Customer ID" />
+    <Label layoutX="22.0" layoutY="138.0" text="Customer Name" />
+    <Label layoutX="44.0" layoutY="168.0" text="Address" />
+    <Label layoutX="36.0" layoutY="275.0" text="Postal code" />
+    <Label layoutX="26.0" layoutY="310.0" text="Phone Number" />
+    <TextField fx:id="customerIDFIeld" layoutX="117.0" layoutY="102.0" />
+    <TextField fx:id="customerNameField" layoutX="117.0" layoutY="134.0" />
+    <TextField fx:id="customerAddressField" layoutX="117.0" layoutY="164.0" />
+    <TextField fx:id="postalCodeField" layoutX="118.0" layoutY="271.0" />
+    <TextField fx:id="phoneNumberField" layoutX="117.0" layoutY="306.0" />
+    <Label layoutX="52.0" layoutY="239.0" text="State" />
+    <ComboBox fx:id="stateComboBox" layoutX="118.0" layoutY="235.0" onAction="#onStateComboBox" prefHeight="17.0" prefWidth="150.0" />
+    <Label layoutX="46.0" layoutY="203.0" text="Country" />
+    <ComboBox fx:id="countryComboBox" layoutX="117.0" layoutY="199.0" onAction="#onCountryComboBox" prefHeight="17.0" prefWidth="150.0" />
+    <Button fx:id="returnButton" layoutX="368.0" layoutY="259.0" mnemonicParsing="false" onAction="#returnToMainScreenAction" text="Return To Main Screen" />
+    <Button layoutX="381.0" layoutY="164.0" mnemonicParsing="false" onAction="#updateCustomer" text="Update Customer" />
+   <Button layoutX="354.0" layoutY="212.0" mnemonicParsing="false" onAction="#Return" text="Return to Customer Records" />
+
+</AnchorPane>

@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.*;
-import utility.Helper;
+import utility.localTime;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,9 +59,9 @@ public class ScheduleAppointment implements Initializable {
         ObservableList<Customer> customers = DBCustomer.getAllCustomers();
         customerComboBox.setItems(customers);
 
-        startComboBox.setItems(Helper.getStartTimeList());
+        startComboBox.setItems(localTime.getStartTimeList());
 
-        endComboBox.setItems(Helper.getEndTimeList());
+        endComboBox.setItems(localTime.getEndTimeList());
 
         typeComboBox.setItems(types);
 
@@ -126,7 +126,6 @@ public class ScheduleAppointment implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentScreen.fxml"));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1000,600);
-        stage.setTitle("Appointments");
         stage.setScene(scene);
         stage.show();
     }

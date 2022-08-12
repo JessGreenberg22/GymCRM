@@ -3,7 +3,8 @@ package model;
  * @Author Jessica Greenberg Student ID 001462404
  */
 
-import java.sql.Timestamp;
+import javafx.collections.ObservableList;
+
 import java.time.LocalDateTime;
 
 /**customer Object class*/
@@ -21,9 +22,8 @@ public class Customer{
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
 
-    /**
-     * constructor for new instance of a product
-     */
+    /**constructor for a new Customer*/
+
     public Customer (int customerID, String name, String address, int divisionID, String postalCode, String phoneNumber) {
         this.customerID = customerID;
         this.name = name;
@@ -32,7 +32,14 @@ public class Customer{
         this.postalCode = postalCode;
         this.phoneNumber = phoneNumber;
     }
-
+   /* public Customer (int customerID, String name, String address,String country, int divisionID, String postalCode, String phoneNumber) {
+        this.customerID = customerID;
+        this.name = name;
+        this.address = address;
+        this.divisionID = divisionID;
+        this.postalCode = postalCode;
+        this.phoneNumber = phoneNumber;
+    }*/
 
     /**Getters*/
 
@@ -80,9 +87,9 @@ public class Customer{
         return lastUpdatedBy;
     }
 
-    /**
-     * defines the setters for the Customer class
-     */
+
+
+    /**setters*/
     public void setCustomerID(int customerID){
         this.customerID = customerID;
     }

@@ -7,9 +7,9 @@
    <children>
       <TextField fx:id="userIdLabel" layoutX="81.0" layoutY="119.0" promptText="User ID" />
       <TextField fx:id="passwordLabel" layoutX="81.0" layoutY="168.0" promptText="Password" />
-      <Button fx:id="LogInButton" layoutX="161.0" layoutY="242.0" mnemonicParsing="false" onAction="#logInBtn" text="Log In" />
+      <Button fx:id="LogInButtonId" layoutX="161.0" layoutY="242.0" mnemonicParsing="false" onAction="#onLogInBtn" text="Log In" />
       <Label fx:id="welcomeLabel" layoutX="121.0" layoutY="33.0" prefHeight="17.0" prefWidth="59.0" text="Welcome! " />
       <Label fx:id="enterUserIdLabel" layoutX="46.0" layoutY="58.0" text="Please Enter your User ID and Password" />
-      <Label fx:id="userLocationLabel" layoutX="137.0" layoutY="205.0" text="Users Location" />
+      <Label fx:id="userLocationLabel" layoutX="95.0" layoutY="205.0" text="Users Location" />
    </children>
 </AnchorPane>

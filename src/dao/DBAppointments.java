@@ -7,6 +7,7 @@ import model.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class DBAppointments {
 
@@ -149,8 +150,7 @@ public class DBAppointments {
             }
         }
 
-        /**
-         * method to check for appointment within 15min of login
+        /** check for appointment within 15min of login*/
 
         public static Appointment get15minuteAppointment(String userName) {
             Appointment appointment = null;
@@ -190,7 +190,7 @@ public class DBAppointments {
             }
             return appointment;
         }
-*/
+
         /**method to delete selected appointment*/
         public static void deleteAppointment(int appointmentId) {
 
@@ -206,4 +206,5 @@ public class DBAppointments {
                 throwables.printStackTrace();
             }
         }
-    }
+
+}

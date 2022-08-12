@@ -25,13 +25,9 @@ public class Appointment {
     private int userID;
     private int contactID;
 
-    //empty constructor
     public Appointment() {
     }
 
-    /**
-     * constructor for a new instance of Customer
-     */
 
     public Appointment(int appointmentID, String appointmentTitle, String description, String location, String type, LocalDateTime start, LocalDateTime end, int customerID, int userID, int contactID) {
 
@@ -48,9 +44,7 @@ public class Appointment {
 
     }
 
-    /**
-     * defines the getters for Appointment class
-     */
+    /** getters*/
 
     public int getAppointmentID(){
         return appointmentID;
@@ -113,9 +107,7 @@ public class Appointment {
 
     public int getContactID() { return contactID;}
 
-    /**
-     * default setters for the Appointment class
-     */
+    /**setters*/
 
     public void setAppointmentID(int appointmentID){
         this.appointmentID = appointmentID;

@@ -16,7 +16,6 @@ public class User {
     private String lastUpdatedBy;
 
     /**constructor*/
-
     public User(int userID, String userName,String password){
         this.userID = userID;
         this.userName = userName;

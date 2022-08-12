@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 /** Country Model
  * @Author Jessica Greenberg Student ID 001462404
  */
+
+
 public class Country {
     private int countryID;
     private String countryName;
@@ -43,10 +45,7 @@ public class Country {
         return lastUpdatedBy;
     }
 
-    /**
-     * define the setters
-     * @return
-     */
+    /**Setters*/
     public void setCountryID(int countryID){
         this.countryID = countryID;
     }

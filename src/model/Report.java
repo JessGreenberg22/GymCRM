@@ -9,8 +9,16 @@ public class Report {
     private String month;
     private String totalNumberOfAppointments;
     private String type;
+    private String appType;
 
-    private int appointmentID;
+    public int getContactID() {
+        return contactID;
+    }
+
+    public void setContactID(int contactID) {
+        this.contactID = contactID;
+    }
+
     private String title;
     private String appointmentType;
     private String description;
@@ -18,22 +26,16 @@ public class Report {
     private LocalDateTime end;
     private int customerID;
     private int contactID;
+    private int appointmentID;
 
-    private int year;
-    private String totalCustomerAppointments;
-
-    /*
-    constructor for total number of appointment types per month
-     */
+    /*constructor for total number of appointment types per month*/
     public Report(String month, String type, String totalNumberOfAppointments) {
         this.month = month;
         this.type = type;
         this.totalNumberOfAppointments = totalNumberOfAppointments;
     }
 
-    /*
-     * constructor for contact schedule
-     */
+    /* constructor for contact schedule*/
     public Report(int appointmentID, String title, String appointmentType, String description, LocalDateTime start, LocalDateTime end, int customerID, int contactID) {
 
         this.appointmentID = appointmentID;
@@ -46,13 +48,18 @@ public class Report {
         this.contactID = contactID;
     }
 
-    /*
-    constructor for total customer appointments per year
-     */
-    public Report(int year, int customerID, String totalCustomerAppointments) {
-        this.year = year;
+    /*constructor for IDandType*/
+    public Report( int customerID, String appType) {
         this.customerID = customerID;
-        this.totalCustomerAppointments = totalCustomerAppointments;
+        this.appType = appType;
+
+    }
+    public String getAppType() {
+        return appType;
+    }
+
+    public void setAppType(String appType) {
+        this.appType = appType;
     }
 
     public String getMonthName() {
@@ -81,7 +88,7 @@ public class Report {
         this.totalNumberOfAppointments = totalNumberOfAppointments;
     }
 
-    /**Getters*/
+    /**Getters & Setters*/
     public String getAppointmentType() {
         return appointmentType;
     }
@@ -138,22 +145,6 @@ public class Report {
         this.customerID = customerID;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public String getTotalCustomerAppointments() {
-        return totalCustomerAppointments;
-    }
-
-    public void setTotalCustomerAppointments(String totalCustomerAppointments) {
-        this.totalCustomerAppointments = totalCustomerAppointments;
-    }
-
     public String getType() {
         return type;
     }
@@ -162,13 +153,23 @@ public class Report {
         this.type = type;
     }
 
-
-    public int getContactID() {
-        return contactID;
-    }
-
-    public void setContactID(int contactID) {
-        this.contactID = contactID;
+    @Override
+    public String toString() {
+        return "Report{" +
+                "month='" + month + '\'' +
+                ", totalNumberOfAppointments='" + totalNumberOfAppointments + '\'' +
+                ", type='" + type + '\'' +
+                ", appointmentID=" + appointmentID +
+                ", title='" + title + '\'' +
+                ", appointmentType='" + appointmentType + '\'' +
+                ", description='" + description + '\'' +
+                ", start=" + start +
+                ", end=" + end +
+                ", customerID=" + customerID +
+                ", contactID=" + contactID +
+                ", appType='" + appType + '\'' +
+                ", monthName='" + monthName + '\'' +
+                '}';
     }
 }
 
